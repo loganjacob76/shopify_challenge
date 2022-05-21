@@ -5,6 +5,5 @@ RSpec.describe Beer, type: :model do
    it { should validate_presence_of :name }
    it { should validate_presence_of :inventory }
    it { should validate_numericality_of :inventory }
-   it { should validate_presence_of :active }
   end
 end
