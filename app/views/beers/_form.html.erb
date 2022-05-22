@@ -1,0 +1,10 @@
+<%= form_with model: beer do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, required: true %> <br><br>
+
+  <%= f.label :inventory %>
+  <%= f.number_field :inventory, required: true, min: 0 %> <br><br>
+
+  <%= f.submit %>
+<% end %>
+<%= button_to 'Cancel', path, method: 'get' %>
