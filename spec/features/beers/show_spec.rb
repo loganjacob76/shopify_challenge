@@ -29,5 +29,11 @@ RSpec.describe 'Beer show page' do
       click_button 'Edit Beer'
       expect(current_path).to eq(edit_beer_path(@beer))
     end
+
+    it 'if I decide not to edit the beer there is a link back to the beers index' do
+      expect(page).to have_link('Return to List of Beers')
+      click_on 'Return to List of Beers'
+      expect(current_path).to eq(beers_path)
+    end
   end
 end
