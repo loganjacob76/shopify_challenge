@@ -22,6 +22,22 @@ class BeersController < ApplicationController
       flash[:error] = "Error: #{error_message(new_beer.errors)}"
     end
   end
+  
+  def edit
+    @beer = Beer.find(params[:id])
+  end
+  
+  def update
+    beer = Beer.find(params[:id])
+    
+    if beer.update(beer_params)
+      redirect_to beer_path(beer)
+      flash[:success] = 'Beer successfully updated'
+    else
+      redirect_to edit_beer_path(beer)
+      flash[:error] = "Error: #{error_message(beer.errors)}"
+    end
+  end
 
   private
   def beer_params
