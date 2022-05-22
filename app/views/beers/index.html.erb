@@ -1,0 +1,7 @@
+<h1>Beer Inventory</h1>
+
+<ul>
+  <% @beers.each do |beer| %>
+    <li> <%= "#{beer.name} - #{beer.inventory} Cases" %> </li>
+  <% end %>
+</ul>
