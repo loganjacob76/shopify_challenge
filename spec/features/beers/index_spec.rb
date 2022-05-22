@@ -6,18 +6,16 @@ RSpec.describe 'beers index page' do
       create(:random_beer)
     end
 
-    @deleted = create(:random_beer, name: 'Deleted Beer', active: false)
+    @deleted = create(:random_beer, name: 'Deleted Beer', inventory: 26, active: false)
+
+    visit root_path
   end
 
   it 'the root path leads to the beers index page' do
-    visit root_path
-
     expect(page).to have_content('Beer Inventory')
   end
 
-  it 'only lists beers currently being handled' do
-    visit root_path
-    
+  it 'only lists beers currently being handled' do    
     expect(page).to have_content(Beer.first.name)
     expect(page).to have_content("#{Beer.first.inventory} Cases")
     expect(page).to have_content(Beer.second.name)
@@ -29,5 +27,11 @@ RSpec.describe 'beers index page' do
 
     expect(page).to_not have_content(@deleted.name)
     expect(page).to_not have_content(@deleted.inventory)
+  end
+
+  it 'has a button to create a new beer record' do
+    expect(page).to have_button('Add New Beer')
+    click_button 'Add New Beer'
+    expect(current_path).to eq(new_beer_path)
   end
 end

@@ -5,3 +5,5 @@
     <li> <%= "#{beer.name} - #{beer.inventory} Cases" %> </li>
   <% end %>
 </ul>
+
+<%= button_to 'Add New Beer', new_beer_path, method: 'get' %>
