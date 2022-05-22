@@ -3,6 +3,10 @@ class BeersController < ApplicationController
     @beers = Beer.in_use
   end
 
+  def show
+    @beer = Beer.find(params[:id])
+  end
+
   def new
     @beer = Beer.new
   end
