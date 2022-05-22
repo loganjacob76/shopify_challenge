@@ -6,7 +6,7 @@ RSpec.describe 'beers index page' do
       create(:random_beer)
     end
 
-    @deleted = create(:random_beer, name: 'Deleted Beer', active: false)
+    @deleted = create(:random_beer, name: 'Deleted Beer', inventory: 4, active: false)
   end
 
   it 'the root path leads to the beers index page' do
