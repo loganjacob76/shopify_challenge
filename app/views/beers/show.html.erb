@@ -1,0 +1,5 @@
+<h1> <%= @beer.name %> </h1>
+
+<%= "Cases in inventory - #{@beer.inventory}" %>
+
+<br><br><%= button_to 'Edit Beer', edit_beer_path(@beer), method: 'get' %>
