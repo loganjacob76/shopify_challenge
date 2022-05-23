@@ -1,24 +1,30 @@
-# README
+# Shopify Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Background and Description
 
-Things you may want to cover:
+Shopify Challenge is built for a logistics company that deals in beers.
+You will automatically be taken to a list of active beers and their number of cases that are currently in inventory.
+Click on a link to see the same type of index, but with deleted beers or click on a specific beer to see it's information.
+The active beer list also has a button to add new beers.
+The beer show pages will have the beer's name, inventory, and deletion comment if available, also a button to edit.
+The edit page will allow you to edit the beer or write a deletion comment and delete it.
+If the beer has already been deleted the edit page will instead have a button to undelete which sets the deletion comment as the date it was undeleted.
 
-* Ruby version
+## Technology and Implementation
 
-* System dependencies
+Shopify Challenge was built using the following technologies:
+* Ruby on Rails
+* Ruby
+* PostgreSQL
 
-* Configuration
+## Setup
 
-* Database creation
+This project runs on Ruby 2.5.3 and Rails 5.2.8.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Fork this repository
+* Clone your fork
+* From the command line, install gems and set up your DB:
+    * `bundle`
+    * `rails db:{create,migrate,seed}`
+* Run the test suite with `bundle exec rspec`.
+* Run your development server with `rails s` to see the app in action.
