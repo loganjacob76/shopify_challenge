@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'beers#index'
   
   resources :beers
+  get '/deleted', to: 'beers#deleted'
 end
