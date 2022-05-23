@@ -1,11 +1,9 @@
-<%= link_to 'Deleted Beers', deleted_path %>
+<%= link_to 'Active Beers', beers_path %>
 
-<h1>Beer Inventory</h1>
+<h1>Deleted Beers</h1>
 
 <ul>
   <% @beers.each do |beer| %>
   <li> <%= link_to "#{beer.name}", beer_path(beer) %> - <%= "#{beer.inventory} Cases" %> </li>
   <% end %>
 </ul>
-
-<%= button_to 'Add New Beer', new_beer_path, method: 'get' %>

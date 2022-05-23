@@ -1,3 +1,15 @@
 <h1>Edit Beer</h1>
 
 <%= render partial: 'form', locals: {beer: @beer, path: beer_path(@beer)} %>
+<br>
+
+<% if @beer.active %>
+  <%= form_with model: @beer, method: 'delete' do |f| %>
+    <%= f.label 'Deletion Comment' %> <br>
+    <%= f.text_area :deletion_comment, required: true %><br>
+
+    <%= f.submit 'Delete Beer' %>
+  <% end %>
+<% else %>
+  <%= button_to 'Undelete Beer', beer_path(@beer), method: 'delete' %>
+<% end %>

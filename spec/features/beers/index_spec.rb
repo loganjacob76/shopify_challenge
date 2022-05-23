@@ -6,7 +6,7 @@ RSpec.describe 'beers index page' do
       create(:random_beer)
     end
 
-    @deleted = create(:random_beer, name: 'Deleted Beer', inventory: 26, active: false)
+    @deleted = create(:random_beer, name: 'NoMore Beer', inventory: 26, active: false)
 
     visit root_path
   end
@@ -33,5 +33,11 @@ RSpec.describe 'beers index page' do
     expect(page).to have_button('Add New Beer')
     click_button 'Add New Beer'
     expect(current_path).to eq(new_beer_path)
+  end
+
+  it 'has a link to an index of deleted beers' do
+    expect(page).to have_link('Deleted Beers')
+    click_on 'Deleted Beers'
+    expect(current_path).to eq(deleted_path)
   end
 end
