@@ -2,7 +2,7 @@
 
 <ul>
   <% @beers.each do |beer| %>
-    <li> <%= "#{beer.name} - #{beer.inventory} Cases" %> </li>
+  <li> <%= link_to "#{beer.name}", beer_path(beer) %> - <%= "#{beer.inventory} Cases" %> </li>
   <% end %>
 </ul>
 

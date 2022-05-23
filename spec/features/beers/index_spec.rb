@@ -16,13 +16,13 @@ RSpec.describe 'beers index page' do
   end
 
   it 'only lists beers currently being handled' do    
-    expect(page).to have_content(Beer.first.name)
+    expect(page).to have_link(Beer.first.name)
     expect(page).to have_content("#{Beer.first.inventory} Cases")
-    expect(page).to have_content(Beer.second.name)
+    expect(page).to have_link(Beer.second.name)
     expect(page).to have_content("#{Beer.second.inventory} Cases")
-    expect(page).to have_content(Beer.third.name)
+    expect(page).to have_link(Beer.third.name)
     expect(page).to have_content("#{Beer.third.inventory} Cases")
-    expect(page).to have_content(Beer.fourth.name)
+    expect(page).to have_link(Beer.fourth.name)
     expect(page).to have_content("#{Beer.fourth.inventory} Cases")
 
     expect(page).to_not have_content(@deleted.name)
