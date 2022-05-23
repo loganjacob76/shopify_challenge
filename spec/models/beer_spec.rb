@@ -22,5 +22,12 @@ RSpec.describe Beer, type: :model do
         expect(Beer.all.count).to eq(5)
       end
     end
+    
+    describe '.deleted' do
+      it 'only returns beers that have been deleted' do
+        expect(Beer.deleted.count).to eq(1)
+        expect(Beer.all.count).to eq(5)
+      end
+    end
   end
 end
