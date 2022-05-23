@@ -3,6 +3,10 @@ class BeersController < ApplicationController
     @beers = Beer.in_use
   end
 
+  def deleted
+    @beers = Beer.deleted
+  end
+
   def show
     @beer = Beer.find(params[:id])
   end
@@ -38,9 +42,24 @@ class BeersController < ApplicationController
       flash[:error] = "Error: #{error_message(beer.errors)}"
     end
   end
+  
+  def destroy
+    beer = Beer.find(params[:id])
+    beer.toggle!(:active)
+    
+    if beer.active
+      beer.update(deletion_comment: "Undeleted at #{Time.now.strftime('%m/%d/%y')}")
+      redirect_to beer_path(beer)
+      flash[:success] = 'Beer successfully undeleted'
+    else
+      beer.update(beer_params)
+      redirect_to beer_path(beer)
+      flash[:success] = 'Beer successfully deleted'
+    end
+  end
 
   private
   def beer_params
-    params.require(:beer).permit(:name, :inventory)
+    params.require(:beer).permit(:name, :inventory, :deletion_comment)
   end
 end
