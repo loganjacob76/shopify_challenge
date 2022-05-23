@@ -1,7 +1,19 @@
-<%= link_to 'Return to List of Beers', beers_path %>
+
+<% if @beer.active %>
+  <%= link_to 'Return to List of Beers', beers_path %>
+<% else %>
+  <%= link_to 'Return to List of Deleted Beers', deleted_path %>
+<% end %>
+
 
 <h1> <%= @beer.name %> </h1>
 
 <%= "Cases in inventory - #{@beer.inventory}" %>
+
+
+<% if @beer.deletion_comment.present? %>
+  <br><br><%= "Deletion Comment: #{@beer.deletion_comment}" %>
+<% end %>
+
 
 <br><br><%= button_to 'Edit Beer', edit_beer_path(@beer), method: 'get' %>

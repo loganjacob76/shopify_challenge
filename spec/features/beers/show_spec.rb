@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Beer show page' do
   before :each do
     @beer = create(:random_beer)
-    @other_beer = create(:random_beer)
+    @other_beer = create(:random_beer, deletion_comment: 'Exists')
+    @deleted = create(:random_beer, active: false)
 
     visit beer_path(@beer)
   end
@@ -34,6 +35,22 @@ RSpec.describe 'Beer show page' do
       expect(page).to have_link('Return to List of Beers')
       click_on 'Return to List of Beers'
       expect(current_path).to eq(beers_path)
+    end
+    
+    it 'if the beer is deleted there is a link back to the deleted beers index' do
+      visit beer_path(@deleted)
+      
+      expect(page).to have_link('Return to List of Deleted Beers')
+      click_on 'Return to List of Deleted Beers'
+      expect(current_path).to eq(deleted_path)
+    end
+    
+    it 'There is only a deletion comment if one exists' do
+      expect(page).to_not have_content('Deletion Comment:')
+
+      visit beer_path(@other_beer)
+
+      expect(page).to have_content('Deletion Comment: Exists')
     end
   end
 end
