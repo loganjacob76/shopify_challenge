@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Edit beer page' do
   before :each do
     @beer = create(:random_beer)
+    @deleted = create(:random_beer, active: false)
 
     visit edit_beer_path(@beer)
   end
@@ -30,6 +31,28 @@ RSpec.describe 'Edit beer page' do
 
       expect(current_path).to eq(edit_beer_path(@beer))
       expect(page).to have_content("Error: Name can't be blank, Inventory can't be blank, Inventory is not a number")
+    end
+
+    it 'there is a form to delete an active beer' do
+      sentence = Faker::Lorem.sentence
+      
+      fill_in :beer_deletion_comment, with: sentence
+      click_on 'Delete Beer'
+
+      expect(current_path).to eq(beer_path(@beer))
+      expect(page).to have_content('Beer successfully deleted')
+      expect(page).to have_content("Deletion Comment: #{sentence}")
+    end
+    
+    it 'deleted beers have a button to undelete' do
+      visit edit_beer_path(@deleted)
+      
+      expect(page).to have_button('Undelete Beer')
+      click_on 'Undelete Beer'
+      
+      expect(current_path).to eq(beer_path(@deleted))
+      expect(page).to have_content('Beer successfully undeleted')
+      expect(page).to have_content("Deletion Comment: Undeleted at #{Time.now.strftime('%m/%d/%y')}")
     end
   end
 end
